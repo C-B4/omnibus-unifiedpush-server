@@ -42,5 +42,5 @@ build do
 
   # Strip KC version from packages.
   link "#{install_dir}/embedded/apps/keycloak-server/keycloak-overlay-#{version}", "#{install_dir}/embedded/apps/keycloak-server/keycloak-overlay"
-  link "#{install_dir}/embedded/apps/keycloak-server/keycloak-overlay/modules/system/add-ons/keycloak/org/keycloak/keycloak-wildfly-server-subsystem/main/keycloak-wildfly-server-subsystem-#{version}.jar #{install_dir}/embedded/apps/keycloak-server/keycloak-overlay/modules/system/add-ons/keycloak/org/keycloak/keycloak-wildfly-server-subsystem/main/keycloak-wildfly-server-subsystem.jar
+  link "#{install_dir}/embedded/apps/keycloak-server/keycloak-overlay/modules/system/add-ons/keycloak/org/keycloak/keycloak-wildfly-server-subsystem/main/keycloak-wildfly-server-subsystem-#{version}.jar #{install_dir}/embedded/apps/keycloak-server/keycloak-overlay/modules/system/add-ons/keycloak/org/keycloak/keycloak-wildfly-server-subsystem/main/keycloak-wildfly-server-subsystem.jar"
 end
