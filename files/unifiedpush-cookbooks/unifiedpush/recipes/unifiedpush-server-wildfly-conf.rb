@@ -21,13 +21,15 @@
 install_dir = node['package']['install-dir']
 server_dir = node['unifiedpush']['unifiedpush-server']['dir']
 modules_dir = "#{server_dir}/modules/org/postgresql/main"
+cli_dir = "#{server_dir}/cli"
 
 account_helper = AccountHelper.new(node)
 unifiedpush_user = account_helper.unifiedpush_user
 
 # These directories do not need to be writable for unifiedpush-server
 [
-  modules_dir 
+  modules_dir,
+  cli_dir
 ].each do |dir_name|
   directory dir_name do
     owner unifiedpush_user
@@ -41,7 +43,7 @@ unifiedpush_vars = node['unifiedpush']['unifiedpush-server'].to_hash
 keycloak_vars = node['unifiedpush']['keycloak-server'].to_hash
  
 # Prepare datasource cli config script
-template "#{server_dir}/bin/unifiedpush-server-wildfly-ds.cli" do
+template "#{server_dir}/cli/unifiedpush-server-wildfly-ds.cli" do
   owner unifiedpush_user
   group "root"
   mode 0755
@@ -50,7 +52,7 @@ template "#{server_dir}/bin/unifiedpush-server-wildfly-ds.cli" do
 end
 
 # Prepare http cli config script
-template "#{server_dir}/bin/unifiedpush-server-wildfly-http.cli" do
+template "#{server_dir}/cli/unifiedpush-server-wildfly-http.cli" do
   owner unifiedpush_user
   group "root"
   mode 0755
@@ -59,7 +61,7 @@ template "#{server_dir}/bin/unifiedpush-server-wildfly-http.cli" do
 end
 
 # Prepare kc cli config script
-template "#{server_dir}/bin/unifiedpush-server-wildfly-kc.cli" do
+template "#{server_dir}/cli/unifiedpush-server-wildfly-kc.cli" do
   owner unifiedpush_user
   group "root"
   mode 0755
@@ -68,7 +70,7 @@ template "#{server_dir}/bin/unifiedpush-server-wildfly-kc.cli" do
 end
 
 # Prepare oauth2 cli config script
-template "#{server_dir}/bin/unifiedpush-server-wildfly-oauth2.cli" do
+template "#{server_dir}/cli/unifiedpush-server-wildfly-oauth2.cli" do
   owner unifiedpush_user
   group "root"
   mode 0755
@@ -78,7 +80,7 @@ end
 
 # Copy JMS configuration cli script.
 remote_file "Copy jms cli script" do
-  path "#{server_dir}/bin/unifiedpush-server-wildfly-jms.cli"
+  path "#{server_dir}/cli/unifiedpush-server-wildfly-jms.cli"
   source "file://#{install_dir}/embedded/apps/unifiedpush-server/configuration/jms-setup-wildfly.cli"
   owner unifiedpush_user
   group 'root'
@@ -99,23 +101,23 @@ include_recipe "unifiedpush::postgresql-module-wildfly-conf"
 
 # Execute cli scripts
 execute 'UPS datasource cli script' do
-  command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/bin/unifiedpush-server-wildfly-ds.cli"
+  command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/cli/unifiedpush-server-wildfly-ds.cli"
 end
 
 execute 'UPS http/s cli script' do
-  command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/bin/unifiedpush-server-wildfly-http.cli"
+  command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/cli/unifiedpush-server-wildfly-http.cli"
 end
 
 execute 'UPS kc cli script' do
-  command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/bin/unifiedpush-server-wildfly-kc.cli"
+  command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/cli/unifiedpush-server-wildfly-kc.cli"
 end
 
 execute 'UPS kc cli script' do
-  command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/bin/unifiedpush-server-wildfly-oauth2.cli"
+  command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/cli/unifiedpush-server-wildfly-oauth2.cli"
 end
 
 execute 'UPS jms cli script' do
-  command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/bin/unifiedpush-server-wildfly-jms.cli"
+  command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/cli/unifiedpush-server-wildfly-jms.cli"
 end
 
 # Link apps
