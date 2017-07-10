@@ -40,6 +40,7 @@ build do
   command "mkdir -p #{install_dir}/embedded/apps/keycloak-server/keycloak-overlay-#{version}"
   sync "#{project_dir}/", "#{install_dir}/embedded/apps/keycloak-server/keycloak-overlay-#{version}"
 
-  # Strip version from packages.
+  # Strip KC version from packages.
   link "#{install_dir}/embedded/apps/keycloak-server/keycloak-overlay-#{version}", "#{install_dir}/embedded/apps/keycloak-server/keycloak-overlay"
+  link "#{install_dir}/embedded/apps/keycloak-server/keycloak-overlay/modules/system/add-ons/keycloak/org/keycloak/keycloak-wildfly-server-subsystem/main/keycloak-wildfly-server-subsystem-#{version}.jar #{install_dir}/embedded/apps/keycloak-server/keycloak-overlay/modules/system/add-ons/keycloak/org/keycloak/keycloak-wildfly-server-subsystem/main/keycloak-wildfly-server-subsystem.jar
 end

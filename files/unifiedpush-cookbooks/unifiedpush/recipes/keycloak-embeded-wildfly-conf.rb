@@ -31,10 +31,15 @@ include_recipe "unifiedpush::postgresql-module-wildfly-conf"
 
 execute "copy keycloak overlay to wildfly dir" do
     command "cp -R #{install_dir}/embedded/apps/keycloak-server/keycloak-overlay/* #{server_dir}"
-    user 'root'
+    user "root"
 end
 
-template "#{server_dir}/bin/keycloak-server-wildfly.cli" do
+execute "extract default-keycloak-subsys-config.cli from jar" do
+    command "cd #{server_dir}; jar -xvf  /opt/unifiedpush/embedded/apps/keycloak-server/keycloak-overlay/modules/system/add-ons/keycloak/org/keycloak/keycloak-wildfly-server-subsystem/main/keycloak-wildfly-server-subsystem.jar cli/default-keycloak-subsys-config.cli"
+    user "root"
+end
+
+template "#{server_dir}/cli/keycloak-server-wildfly.cli" do
   owner unifiedpush_user
   group "root"
   mode 0755
@@ -45,7 +50,7 @@ template "#{server_dir}/bin/keycloak-server-wildfly.cli" do
   ))
 end
 
-template "#{server_dir}/bin/keycloak-server-ups-realms.cli" do
+template "#{server_dir}/cli/keycloak-server-ups-realms.cli" do
   owner unifiedpush_user
   group "root"
   mode 0755
@@ -54,11 +59,11 @@ template "#{server_dir}/bin/keycloak-server-ups-realms.cli" do
 end
 
 execute 'KC datasource and config cli script' do
-  command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/bin/keycloak-server-wildfly.cli"
+  command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/cli/keycloak-server-wildfly.cli"
 end
 
 execute 'KC datasource and config cli script' do
-  command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/bin/keycloak-server-ups-realms.cli"
+  command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/cli/keycloak-server-ups-realms.cli"
 end
 
 # Extract default theme

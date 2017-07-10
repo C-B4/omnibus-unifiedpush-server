@@ -14,4 +14,4 @@ embed-server --server-config=standalone-full-ha.xml
 /subsystem=infinispan/cache-container=keycloak/local-cache=keys/eviction=EVICTION:add(max-entries=1000,strategy=LRU)
 /subsystem=infinispan/cache-container=keycloak/local-cache=keys/expiration=EXPIRATION:add(max-idle=3600000)
 /extension=org.keycloak.keycloak-server-subsystem/:add(module=org.keycloak.keycloak-server-subsystem)
-run-batch --file=<%= @server_dir %>/bin/default-keycloak-subsys-config.cli
+run-batch --file=<%= @server_dir %>/cli/default-keycloak-subsys-config.cli
