@@ -36,7 +36,6 @@ account "Webserver user and group" do
   home node['unifiedpush']['web-server']['home']
   append_to_group append_members
   group_members external_webserver_users
-  user_supports manage_home: false
   manage node['unifiedpush']['manage-accounts']['enable']
 end
 

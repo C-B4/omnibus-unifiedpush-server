@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-define :account, action: nil, username: nil, uid: nil, ugid: nil, groupname: nil, gid: nil, shell: nil, home: nil, system: true, append_to_group: false, group_members: [], user_supports: {}, manage: nil do
+define :account, action: nil, username: nil, uid: nil, ugid: nil, groupname: nil, gid: nil, shell: nil, home: nil, system: true, append_to_group: false, group_members: [], manage: nil do
 
   manage = params[:manage]
 
@@ -41,7 +41,6 @@ define :account, action: nil, username: nil, uid: nil, ugid: nil, groupname: nil
       uid params[:uid]
       gid params[:ugid]
       system params[:system]
-      supports params[:user_supports]
       action params[:action]
     end
   end
