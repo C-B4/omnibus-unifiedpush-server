@@ -24,7 +24,7 @@
 	branch = v4.2.3
 [submodule "cassandra-dse"]
 	path = files/unifiedpush-cookbooks/cassandra-dse
-	url = https://github.com/michaelklishin/cassandra-chef-cookbook.git
+	url = https://github.com/aerobase/cassandra-chef-cookbook.git
 	branch = master
 [submodule "ulimit"]
 	path = files/unifiedpush-cookbooks/ulimit
