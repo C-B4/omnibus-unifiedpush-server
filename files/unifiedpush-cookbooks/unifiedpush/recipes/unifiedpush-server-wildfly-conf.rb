@@ -78,6 +78,15 @@ template "#{server_dir}/cli/unifiedpush-server-wildfly-oauth2.cli" do
   variables(unifiedpush_vars)
 end
 
+# Prepare jgroup cli config script
+template "#{server_dir}/cli/unifiedpush-server-wildfly-jgroup.cli" do
+  owner unifiedpush_user
+  group "root"
+  mode 0755
+  source "unifiedpush-server-wildfly-jgroup-cli.erb"
+  variables(unifiedpush_vars)
+end
+
 # Copy JMS configuration cli script.
 remote_file "Copy jms cli script" do
   path "#{server_dir}/cli/unifiedpush-server-wildfly-jms.cli"
