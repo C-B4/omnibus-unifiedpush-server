@@ -72,6 +72,7 @@ default['unifiedpush']['unifiedpush-server']['server_port'] = 80
 default['unifiedpush']['unifiedpush-server']['server_https'] = false
 default['unifiedpush']['unifiedpush-server']['time_zone'] = nil
 default['unifiedpush']['unifiedpush-server']['cache_owners'] = 1
+default['unifiedpush']['unifiedpush-server']['java_xmx'] = "1g"
 # OAuth2 Configureation, webapp_host is used for web application clients.
 default['unifiedpush']['unifiedpush-server']['webapp_host'] = node['fqdn']
 default['unifiedpush']['unifiedpush-server']['oauth2_enabled'] = true

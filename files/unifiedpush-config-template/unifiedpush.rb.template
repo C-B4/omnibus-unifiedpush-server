@@ -54,6 +54,7 @@ external_url 'GENERATED_EXTERNAL_URL'
 # unifiedpush_server['server_https'] = false
 # unifiedpush_server['time_zone'] = nil
 # unifiedpush_server['cache_owners'] = 1
+# unifiedpush_server['java_xmx'] = "1g"
 ## OAuth2 Configureation, webapp_host is used for web application clients.
 # unifiedpush_server['webapp_host'] = node['fqdn']
 # unifiedpush_server['oauth2_enabled'] = true
