@@ -66,10 +66,12 @@ default['unifiedpush']['unifiedpush-server']['env'] = {
 default['unifiedpush']['unifiedpush-server']['documents_directory'] = "/var/opt/unifiedpush/unifiedpush-server/documents"
 default['unifiedpush']['unifiedpush-server']['uploads_directory'] = "/var/opt/unifiedpush/unifiedpush-server/uploads"
 default['unifiedpush']['unifiedpush-server']['server_host'] = node['fqdn']
+default['unifiedpush']['unifiedpush-server']['server_address'] = node['ipaddress']
 default['unifiedpush']['unifiedpush-server']['server_contactpoints'] = node['fqdn']
 default['unifiedpush']['unifiedpush-server']['server_port'] = 80
 default['unifiedpush']['unifiedpush-server']['server_https'] = false
 default['unifiedpush']['unifiedpush-server']['time_zone'] = nil
+default['unifiedpush']['unifiedpush-server']['cache_owners'] = 1
 # OAuth2 Configureation, webapp_host is used for web application clients.
 default['unifiedpush']['unifiedpush-server']['webapp_host'] = node['fqdn']
 default['unifiedpush']['unifiedpush-server']['oauth2_enabled'] = true

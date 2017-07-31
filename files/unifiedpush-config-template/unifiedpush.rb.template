@@ -48,10 +48,12 @@ external_url 'GENERATED_EXTERNAL_URL'
 # unifiedpush_server['documents_directory'] = "/var/opt/unifiedpush/unifiedpush-server/documents"
 # unifiedpush_server['uploads_directory'] = "/var/opt/unifiedpush/unifiedpush-server/uploads"
 # unifiedpush_server['server_host'] = node['fqdn']
+# unifiedpush_server['server_address'] = node['ipaddress']
 # unifiedpush_server['server_contactpoints'] = node['fqdn']
 # unifiedpush_server['server_port'] = 80
 # unifiedpush_server['server_https'] = false
 # unifiedpush_server['time_zone'] = nil
+# unifiedpush_server['cache_owners'] = 1
 ## OAuth2 Configureation, webapp_host is used for web application clients.
 # unifiedpush_server['webapp_host'] = node['fqdn']
 # unifiedpush_server['oauth2_enabled'] = true

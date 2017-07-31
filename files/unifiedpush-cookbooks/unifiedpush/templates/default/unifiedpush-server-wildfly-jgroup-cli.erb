@@ -1,7 +1,7 @@
 embed-server --server-config=standalone-full-ha.xml
 /subsystem="jgroups"/stack="tcpping":add()
 /subsystem="jgroups"/stack="tcpping":add-protocol(type="TCPPING")
-/subsystem="jgroups"/stack="tcpping"/protocol="TCPPING"/property="initial_hosts":add(value=<%= @server_contactpoints %>)
+/subsystem="jgroups"/stack="tcpping"/protocol="TCPPING"/property="initial_hosts":add(value="<% @server_contactpoints.split(",").each do |contactpoint| %><%= contactpoint %>[7600],<% end %>")
 /subsystem="jgroups"/stack="tcpping"/protocol="TCPPING"/property="port_range":add(value="10")
 /subsystem="jgroups"/stack="tcpping"/protocol="TCPPING"/property="timeout":add(value="3000")
 /subsystem="jgroups"/stack="tcpping"/protocol="TCPPING"/property="num_initial_members":add(value="2")
@@ -21,4 +21,5 @@ embed-server --server-config=standalone-full-ha.xml
 /subsystem="jgroups"/stack="tcpping"/transport="TRANSPORT":add(socket-binding="jgroups-tcp",type="TCP")
 /subsystem="infinispan"/cache-container="aerobase":add(jndi-name="infinispan/Aerobase")
 /subsystem="infinispan"/cache-container="aerobase"/transport="TRANSPORT":add(lock-timeout=60000)
-/subsystem="infinispan"/cache-container="aerobase"/distributed-cache="aerobase":add(mode="SYNC",owners="1")
+/subsystem="infinispan"/cache-container="aerobase"/distributed-cache="aerobase":add(mode="SYNC",owners="<%= @cache_owners %>")
+/subsystem="jgroups"/channel="ee":write-attribute(name=stack,value=tcpping)

@@ -121,12 +121,16 @@ execute 'UPS kc cli script' do
   command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/cli/unifiedpush-server-wildfly-kc.cli"
 end
 
-execute 'UPS kc cli script' do
+execute 'UPS oauth2 cli script' do
   command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/cli/unifiedpush-server-wildfly-oauth2.cli"
 end
 
 execute 'UPS jms cli script' do
   command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/cli/unifiedpush-server-wildfly-jms.cli"
+end
+
+execute 'UPS jgroup cli script' do
+  command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/cli/unifiedpush-server-wildfly-jgroup.cli"
 end
 
 # Link apps

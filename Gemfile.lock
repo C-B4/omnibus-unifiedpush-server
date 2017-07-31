@@ -1,7 +1,7 @@
 GIT
-  remote: git://github.com/C-B4/omnibus-software.git
-  revision: 1a79efd94a665677ddf2aba91ac47baf1ecce683
-  branch: upstream_master
+  remote: git://github.com/aerobase/omnibus-software.git
+  revision: cfde77765f23d57eedbdd0fa7ffc94d3c4a18d8a
+  branch: master
   specs:
     omnibus-software (4.0.0)
       chef-sugar (>= 3.4.0)

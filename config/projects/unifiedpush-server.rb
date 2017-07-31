@@ -36,6 +36,7 @@ dependency "postgresql"
 dependency "nginx"
 dependency "omnibus-ctl"
 dependency "chef"
+dependency "python"
 dependency "logrotate"
 dependency "runit"
 
