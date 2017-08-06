@@ -34,11 +34,6 @@ execute "copy keycloak overlay to wildfly dir" do
     user "root"
 end
 
-execute "extract default-keycloak-subsys-config.cli from jar" do
-    command "cd #{server_dir}; jar -xvf  /opt/unifiedpush/embedded/apps/keycloak-server/keycloak-overlay/modules/system/add-ons/keycloak/org/keycloak/keycloak-wildfly-server-subsystem/main/keycloak-wildfly-server-subsystem.jar cli/default-keycloak-subsys-config.cli"
-    user "root"
-end
-
 template "#{server_dir}/cli/keycloak-server-wildfly.cli" do
   owner unifiedpush_user
   group "root"
