@@ -55,11 +55,12 @@ external_url 'GENERATED_EXTERNAL_URL'
 # unifiedpush_server['time_zone'] = nil
 # unifiedpush_server['cache_owners'] = 1
 # unifiedpush_server['java_xmx'] = "1g"
-## OAuth2 Configureation, webapp_host is used for web application clients.
+## OAuth2 Configureation, webapp_host is used as web applications root-url.
 # unifiedpush_server['webapp_host'] = node['fqdn']
 # unifiedpush_server['oauth2_enabled'] = true
 # unifiedpush_server['oauth2_admin_user'] = "admin"
 # unifiedpush_server['oauth2_admin_pass'] = "password"
+# unifiedpush_server['oauth2_subdomain_seperator'] = "."
 ## Cassandra connection params
 # unifiedpush_server['cas_contactpoints'] = node['fqdn']
 # unifiedpush_server['cas_port'] = "9042"

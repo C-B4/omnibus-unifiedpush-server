@@ -7,3 +7,4 @@ embed-server --server-config=standalone-full-ha.xml
 /system-property=aerogear.config.oauth2.admin.password:add(value=<%= @oauth2_admin_pass %>)
 /system-property=aerogear.config.oauth2.enforce.rooturl.domain:add(value=<%= @webapp_host %>)
 /system-property=aerogear.config.oauth2.enforce.rooturl.protocol:add(value=http<% if @server_https %>s<% end %>)
+/system-property=aerogear.config.oauth2.enforce.rooturl.seperator:add(value=<%= @oauth2_subdomain_seperator %>)
