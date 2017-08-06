@@ -76,7 +76,7 @@ if node['unifiedpush']['cassandra']['enable']
           Chef::Log.fatal("Could not connect to local cassandra node, retrying in 10 seconds.")
           sleep 10
         else
-          if i > 1
+          if i > 0
             Chef::Log.fatal("Cassandra netstats return NORMAL status, waiting additional 15 seconds.")
             sleep 15
           end
