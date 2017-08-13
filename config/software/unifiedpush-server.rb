@@ -25,7 +25,7 @@ dependency "wildfly"
 
 <<<<<<< HEAD
 version "1.2.0-SNAPSHOT" do
-  source md5: "acdf4355512cb3fb6af2d5dd0d11295c"
+  source md5: "2747c7ff6552614cd1603683bbc86322"
 end
 ||||||| parent of 17167ac... Remove unused sources
 source git: "https://github.com/aerobase/unifiedpush-server.git"
