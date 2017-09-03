@@ -143,6 +143,9 @@ external_url 'GENERATED_EXTERNAL_URL'
 # cassandra['group'] = 'unifiedpush'
 # cassandra['root_dir'] = '/var/opt/unifiedpush/cassandra/data'
 # cassandra['seeds'] = node['fqdn']
+# cassandra['max_heap_size'] = '1G'
+# cassandra['heap_new_size'] = '200M'
+# cassandra['heap_dump_dir'] = '/var/opt/unifiedpush/cassandra/data'
 ## Cluster config options
 # cassandra_config['cluster_name'] = 'unifiedpush-cluster'
 

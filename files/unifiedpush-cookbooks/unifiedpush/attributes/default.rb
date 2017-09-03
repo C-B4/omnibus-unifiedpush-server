@@ -179,6 +179,7 @@ default['unifiedpush']['cassandra']['installation_dir'] = '/var/opt/unifiedpush/
 default['unifiedpush']['cassandra']['log_dir'] = '/var/opt/unifiedpush/cassandra/cassandra/logs'
 default['unifiedpush']['cassandra']['log_directory'] = '/var/log/unifiedpush/cassandra'
 default['unifiedpush']['cassandra']['root_dir'] = '/var/opt/unifiedpush/cassandra/data'
+default['unifiedpush']['cassandra']['heap_dump_dir'] = '/var/opt/unifiedpush/cassandra/data'
 default['unifiedpush']['cassandra']['install_java'] = false
 default['unifiedpush']['cassandra']['use_systemd'] = false
 default['unifiedpush']['cassandra']['use_initd'] = false
