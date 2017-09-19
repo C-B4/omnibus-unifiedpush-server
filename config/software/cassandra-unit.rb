@@ -21,6 +21,8 @@ dependency "ruby"
 dependency "bundler"
 dependency "rsync"
 
+source git: "https://github.com/aerobase/cassandra-unit.git"
+
 relative_path "cassandra-unit"
 build_dir = "#{project_dir}"
 
