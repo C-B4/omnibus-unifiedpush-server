@@ -27,6 +27,7 @@ server_log_dir = node['unifiedpush']['unifiedpush-server']['log_directory']
 server_doc_dir = node['unifiedpush']['unifiedpush-server']['documents_directory']
 server_upl_dir = node['unifiedpush']['unifiedpush-server']['uploads_directory']
 server_conf_dir = "#{server_dir}/standalone/configuration"
+server_etc_dir = "#{server_dir}/etc"
 
 account_helper = AccountHelper.new(node)
 unifiedpush_user = account_helper.unifiedpush_user
@@ -36,7 +37,8 @@ unifiedpush_user = account_helper.unifiedpush_user
   server_dir,
   server_log_dir,
   server_doc_dir, 
-  server_upl_dir
+  server_upl_dir,
+  server_etc_dir
 ].each do |dir_name|
   directory dir_name do
     owner unifiedpush_user
@@ -61,8 +63,15 @@ end
 include_recipe "unifiedpush::unifiedpush-server-wildfly-conf"
 include_recipe "unifiedpush::keycloak-server-wildfly-conf"
 
-template "#{server_conf_dir}/unifiedpush-server.properties" do
-  source "unifiedpush-server.properties.erb"
+template "#{server_etc_dir}/environment.properties" do
+  source "unifiedpush-server-env-properties.erb"
+  owner unifiedpush_user
+  mode "0644"
+  variables(node['unifiedpush']['unifiedpush-server'].to_hash)
+end
+
+template "#{server_etc_dir}/db.properties" do
+  source "unifiedpush-server-db-properties.erb"
   owner unifiedpush_user
   mode "0644"
   variables(node['unifiedpush']['unifiedpush-server'].to_hash)
