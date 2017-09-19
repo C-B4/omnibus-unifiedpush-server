@@ -20,7 +20,6 @@
 
 install_dir = node['package']['install-dir']
 server_dir = node['unifiedpush']['unifiedpush-server']['dir']
-modules_dir = "#{server_dir}/modules/org/postgresql/main"
 cli_dir = "#{server_dir}/cli"
 
 account_helper = AccountHelper.new(node)
@@ -28,7 +27,6 @@ unifiedpush_user = account_helper.unifiedpush_user
 
 # These directories do not need to be writable for unifiedpush-server
 [
-  modules_dir,
   cli_dir
 ].each do |dir_name|
   directory dir_name do
@@ -87,15 +85,6 @@ template "#{server_dir}/cli/unifiedpush-server-wildfly-jgroup.cli" do
   variables(unifiedpush_vars)
 end
 
-# Copy JMS configuration cli script.
-remote_file "Copy jms cli script" do
-  path "#{server_dir}/cli/unifiedpush-server-wildfly-jms.cli"
-  source "file://#{install_dir}/embedded/apps/unifiedpush-server/configuration/jms-setup-wildfly.cli"
-  owner unifiedpush_user
-  group 'root'
-  mode 0755
-end
-
 # Update configuration 
 template "#{server_dir}/bin/standalone.conf" do
   owner unifiedpush_user
@@ -104,9 +93,6 @@ template "#{server_dir}/bin/standalone.conf" do
   source "wildfly-standalone.conf.erb"
   variables(unifiedpush_vars)
 end
-
-# Configure postgresql drived for wildfly
-include_recipe "unifiedpush::postgresql-module-wildfly-conf"
 
 # Execute cli scripts
 execute 'UPS datasource cli script' do
@@ -123,10 +109,6 @@ end
 
 execute 'UPS oauth2 cli script' do
   command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/cli/unifiedpush-server-wildfly-oauth2.cli"
-end
-
-execute 'UPS jms cli script' do
-  command "#{server_dir}/bin/jboss-cli.sh --file=#{server_dir}/cli/unifiedpush-server-wildfly-jms.cli"
 end
 
 execute 'UPS jgroup cli script' do

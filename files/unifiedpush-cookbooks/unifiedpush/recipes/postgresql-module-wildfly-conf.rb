@@ -25,6 +25,18 @@ modules_dir = "#{server_dir}/modules/org/postgresql/main"
 account_helper = AccountHelper.new(node)
 unifiedpush_user = account_helper.unifiedpush_user
 
+# These directories do not need to be writable for unifiedpush-server
+[
+  modules_dir
+].each do |dir_name|
+  directory dir_name do
+    owner unifiedpush_user
+    group "root"
+    mode 0775
+    recursive true
+  end
+end
+
 # Add postgres module
 template "#{modules_dir}/module.xml" do
   owner unifiedpush_user

@@ -1,5 +1,3 @@
 embed-server --server-config=standalone-full-ha.xml
-/subsystem=datasources/data-source=UnifiedPushDS/:add(connection-url="jdbc:postgresql://<%= @db_host %>:<%= @db_port %>/<%= @db_database %>",jta=false,driver-name=postgresql,jndi-name=java:jboss/datasources/UnifiedPushDS,password=unifiedpush_server,user-name=<%= @db_username %>,use-java-context=true,min-pool-size=10,max-pool-size=50,validate-on-match=false,background-validation=false,background-validation-millis=1)
-/subsystem=datasources/jdbc-driver=postgresql:add(driver-name=postgresql,driver-module-name=org.postgresql,driver-xa-datasource-class-name=org.postgresql.xa.PGXADataSource)
 /system-property=aerogear.config.cassandra.contactpoints:add(value="<%= @cas_contactpoints %>")
 /system-property=aerogear.config.cassandra.port:add(value=<%= @cas_port %>)
