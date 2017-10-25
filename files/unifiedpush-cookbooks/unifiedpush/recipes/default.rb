@@ -53,9 +53,8 @@ directory "#{install_dir}/embedded/etc" do
   action :create
 end
 
-if node['unifiedpush']['unifiedpush-server']['enable']
-  include_recipe "unifiedpush::users"
-end
+# Always create default user and group.
+include_recipe "unifiedpush::users"
 
 # Install our runit instance
 include_recipe "runit"

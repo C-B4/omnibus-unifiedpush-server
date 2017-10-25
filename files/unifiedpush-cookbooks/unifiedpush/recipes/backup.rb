@@ -21,6 +21,7 @@ unifiedpush_user = account_helper.unifiedpush_user
 unifiedpush_group = account_helper.unifiedpush_group
 
 # Prepare backup configuration files
+install_dir = node['package']['install-dir']
 home_dir = node['unifiedpush']['user']['home']
 backup_dir = node['unifiedpush']['global']['backup_path']
 
@@ -36,5 +37,13 @@ template "#{home_dir}/postgresql-backup.conf" do
   owner unifiedpush_user
   mode "0664"
   variables(node['unifiedpush']['unifiedpush-server'].to_hash)
+  not_if { !node['unifiedpush']['postgresql']['enable'] }
+end
+
+cron 'postgresql-nightly-backup' do
+  minute "0"
+  hour "2"
+  user "root"
+  command "sh -x #{install_dir}/embedded/cookbooks/unifiedpush/libraries/pg_backup_rotated.sh -c #{home_dir}/postgresql-backup.conf > /tmp/postgresql-backup.log 2>&1"
   not_if { !node['unifiedpush']['postgresql']['enable'] }
 end
