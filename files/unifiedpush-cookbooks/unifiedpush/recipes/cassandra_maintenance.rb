@@ -26,7 +26,7 @@ end
 
 cron 'cassandra-nodetool-full-repair' do
   minute "0"
-  hour "1"
+  hour "2"
   day '1'
   user "root"
   command "nodetool repair --full > /tmp/nodetool-repair.log 2>&1"

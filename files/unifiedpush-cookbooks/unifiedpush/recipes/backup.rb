@@ -42,7 +42,7 @@ end
 
 cron 'postgresql-nightly-backup' do
   minute "0"
-  hour "2"
+  hour "3"
   user "root"
   command "sh -x #{install_dir}/embedded/cookbooks/unifiedpush/libraries/pg_backup_rotated.sh -c #{home_dir}/postgresql-backup.conf > /tmp/postgresql-backup.log 2>&1"
   not_if { !node['unifiedpush']['postgresql']['enable'] }
