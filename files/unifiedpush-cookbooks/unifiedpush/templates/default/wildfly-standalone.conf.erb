@@ -1,6 +1,6 @@
 ## -*- shell-script -*- ######################################################
 ##                                                                          ##
-##  JBoss Bootstrap Script Configuration                                    ##
+##  WildFly bootstrap Script Configuration                                  ##
 ##                                                                          ##
 ##############################################################################
 
@@ -28,6 +28,9 @@
 # be defined to $JAVA_HOME/bin/java, else $JAVA will be "java".
 #
 #JAVA_HOME="/opt/java/jdk"
+
+# tell linux glibc how many memory pools can be created that are used by malloc
+# MALLOC_ARENA_MAX="5"
 
 #
 # Specify the exact Java VM executable to use.
@@ -72,6 +75,8 @@ fi
 # when you get "epoll_create function not implemented" message in dmesg output
 #JAVA_OPTS="$JAVA_OPTS -Djava.nio.channels.spi.SelectorProvider=sun.nio.ch.PollSelectorProvider"
 
+# Uncomment this out to control garbage collection logging
+# GC_LOG="true"
 
 # Load Application properties from a local file.
 JAVA_OPTS="$JAVA_OPTS -Daerobase.config.dir=<%= @dir %>/etc/"

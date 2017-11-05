@@ -32,9 +32,9 @@ If you need to use an HTTPS port other than the default (443), just specify it a
 
     external_url "https://ups.example.com:2443"
 
-In addition proxy-https configuration should be changed to wildfly-standalone-full.xml.erb
+In addition proxy-https configuration should be changed to wildfly-standalone-full.xml
 
-    # vi /opt/unifiedpush/embedded/cookbooks/unifiedpush/templates/default/wildfly-standalone-full.xml.erb:
+    # vi /opt/unifiedpush/embedded/cookbooks/unifiedpush/templates/default/wildfly-standalone-full.xml:
     <socket-binding-group name="standard-sockets" default-interface="public" port-offset="${jboss.socket.binding.port-offset:0}">
         ...
         <socket-binding name="proxy-https" port="2443"/>

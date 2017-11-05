@@ -20,6 +20,10 @@ default_version "master"
 
 source git: "https://github.com/C-B4/unifiedpush-keycloak-theme.git"
 
+dependency "ruby"
+dependency "bundler"
+dependency "rsync"
+
 relative_path "unifiedpush-keycloak-theme"
 build_dir = "#{project_dir}"
 

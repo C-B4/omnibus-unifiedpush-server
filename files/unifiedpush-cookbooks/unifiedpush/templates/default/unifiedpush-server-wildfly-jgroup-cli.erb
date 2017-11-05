@@ -1,25 +1,24 @@
 embed-server --server-config=standalone-full-ha.xml
-/subsystem="jgroups"/stack="tcpping":add()
-/subsystem="jgroups"/stack="tcpping":add-protocol(type="TCPPING")
-/subsystem="jgroups"/stack="tcpping"/protocol="TCPPING"/property="initial_hosts":add(value="<% @server_contactpoints.split(",").each do |contactpoint| %><%= contactpoint %>[7600],<% end %>")
-/subsystem="jgroups"/stack="tcpping"/protocol="TCPPING"/property="port_range":add(value="10")
-/subsystem="jgroups"/stack="tcpping"/protocol="TCPPING"/property="timeout":add(value="3000")
-/subsystem="jgroups"/stack="tcpping"/protocol="TCPPING"/property="num_initial_members":add(value="2")
-/subsystem="jgroups"/stack="tcpping":add-protocol(type="MERGE2")
-/subsystem="jgroups"/stack="tcpping":add-protocol(socket-binding="jgroups-tcp-fd",type="FD_SOCK")
-/subsystem="jgroups"/stack="tcpping":add-protocol(type="FD")
-/subsystem="jgroups"/stack="tcpping":add-protocol(type="VERIFY_SUSPECT")
-/subsystem="jgroups"/stack="tcpping":add-protocol(type="BARRIER")
-/subsystem="jgroups"/stack="tcpping":add-protocol(type="pbcast.NAKACK")
-/subsystem="jgroups"/stack="tcpping":add-protocol(type="UNICAST2")
-/subsystem="jgroups"/stack="tcpping":add-protocol(type="pbcast.STABLE")
-/subsystem="jgroups"/stack="tcpping":add-protocol(type="pbcast.GMS")
-/subsystem="jgroups"/stack="tcpping":add-protocol(type="UFC")
-/subsystem="jgroups"/stack="tcpping":add-protocol(type="MFC")
-/subsystem="jgroups"/stack="tcpping":add-protocol(type="FRAG2")
-/subsystem="jgroups"/stack="tcpping":add-protocol(type="RSVP")
-/subsystem="jgroups"/stack="tcpping"/transport="TRANSPORT":add(socket-binding="jgroups-tcp",type="TCP")
-/subsystem="infinispan"/cache-container="aerobase":add(jndi-name="infinispan/Aerobase")
-/subsystem="infinispan"/cache-container="aerobase"/transport="TRANSPORT":add(lock-timeout=60000)
-/subsystem="infinispan"/cache-container="aerobase"/distributed-cache="aerobase":add(mode="SYNC",owners="<%= @cache_owners %>")
+# Add the tcpping stack
+/subsystem=jgroups/stack=tcpping:add
+/subsystem=jgroups/stack=tcpping/transport=TCP:add(socket-binding=jgroups-tcp)
+/subsystem=jgroups/stack=tcpping/protocol=TCPPING:add
+# Set the properties for the TCPPING protocol
+/subsystem=jgroups/stack=tcpping/protocol=TCPPING:write-attribute(name=properties,value={initial_hosts="<% @server_contactpoints.split(",").each do |contactpoint| %><%= contactpoint %>[7600],<% end %>",port_range=10,timeout=3000,num_initial_members=2})
+/subsystem=jgroups/stack=tcpping/protocol=MERGE3:add
+/subsystem=jgroups/stack=tcpping/protocol=FD_SOCK:add(socket-binding=jgroups-tcp-fd)
+/subsystem=jgroups/stack=tcpping/protocol=FD:add
+/subsystem=jgroups/stack=tcpping/protocol=VERIFY_SUSPECT:add
+/subsystem=jgroups/stack=tcpping/protocol=pbcast.NAKACK2:add
+/subsystem=jgroups/stack=tcpping/protocol=UNICAST3:add
+/subsystem=jgroups/stack=tcpping/protocol=pbcast.STABLE:add
+/subsystem=jgroups/stack=tcpping/protocol=pbcast.GMS:add
+/subsystem=jgroups/stack=tcpping/protocol=MFC:add
+/subsystem=jgroups/stack=tcpping/protocol=FRAG2:add
+# Set tcpping as the stack for the ee channel
+/subsystem=jgroups/channel=ee:write-attribute(name=stack,value=tcpping)
+# Add aerobase cache-container
+/subsystem=infinispan/cache-container=aerobase:add(jndi-name="infinispan/Aerobase")
+/subsystem=infinispan/cache-container=aerobase/transport=TRANSPORT:add(lock-timeout=60000)
+/subsystem=infinispan/cache-container=aerobase/distributed-cache=otpCodes:add(mode="SYNC",owners="<%= @cache_owners %>")
 /subsystem="jgroups"/channel="ee":write-attribute(name=stack,value=tcpping)
