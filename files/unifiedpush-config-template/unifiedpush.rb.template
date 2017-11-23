@@ -131,7 +131,7 @@ external_url 'GENERATED_EXTERNAL_URL'
 #
 # postgresql['work_mem'] = "8MB"
 # postgresql['effective_cache_size'] = "#{(node['memory']['total'].to_i / 2) / (1024)}MB"
-# postgresql['checkpoint_segments'] = 10
+# postgresql['max_wal_size'] = "1GB"
 # postgresql['checkpoint_timeout'] = "5min"
 # postgresql['checkpoint_completion_target'] = 0.9
 # postgresql['checkpoint_warning'] = "30s"
