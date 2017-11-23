@@ -117,6 +117,8 @@ default['unifiedpush']['keycloak-server']['context_root'] = "auth"
 
 default['unifiedpush']['keycloak-server']['db_username'] = "keycloak_server"
 default['unifiedpush']['keycloak-server']['db_database'] = "keycloak_server"
+default['unifiedpush']['keycloak-server']['db_minpoll_size'] = "5"
+default['unifiedpush']['keycloak-server']['db_maxpoll_size'] = "15"
 
 ###
 # PostgreSQL

@@ -98,6 +98,7 @@ external_url 'GENERATED_EXTERNAL_URL'
 # keycloak_server['server_https'] = false
 # keycloak_server['db_username'] = "keycloak_server"
 # keycloak_server['db_database'] = "keycloak_server"
+# keycloak_server['db_maxpoll_size'] = "15"
 # keycloak_server['context_root'] = "auth"
 
 ###

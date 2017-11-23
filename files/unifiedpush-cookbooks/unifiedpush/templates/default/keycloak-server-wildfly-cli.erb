@@ -1,5 +1,5 @@
 embed-server --server-config=standalone-full-ha.xml
-/subsystem=datasources/data-source=KeycloakDS/:add(connection-url="jdbc:postgresql://<%= @db_host %>:<%= @db_port %>/<%= @db_database %>",jta=false,driver-name=postgresql,jndi-name=java:jboss/datasources/KeycloakDS,password=keycloak_server,user-name=<%= @db_username %>,use-java-context=true,min-pool-size=10,max-pool-size=50,validate-on-match=false,background-validation=false,background-validation-millis=1)
+/subsystem=datasources/data-source=KeycloakDS/:add(connection-url="jdbc:postgresql://<%= @db_host %>:<%= @db_port %>/<%= @db_database %>",jta=false,driver-name=postgresql,jndi-name=java:jboss/datasources/KeycloakDS,password=keycloak_server,user-name=<%= @db_username %>,use-java-context=true,min-pool-size=<%= @db_minpoll_size %>,max-pool-size=<%= @db_maxpoll_size %>,validate-on-match=false,background-validation=false,background-validation-millis=1)
 /subsystem=datasources/jdbc-driver=postgresql:add(driver-name=postgresql,driver-module-name=org.postgresql,driver-xa-datasource-class-name=org.postgresql.xa.PGXADataSource)
 /subsystem=infinispan/cache-container=keycloak:add(jndi-name="infinispan/Keycloak")
 /subsystem=infinispan/cache-container=keycloak/transport=TRANSPORT:add(lock-timeout=60000)
