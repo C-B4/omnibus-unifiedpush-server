@@ -48,7 +48,7 @@ end
 # Copy postgres JDBC driver
 remote_file "Copy postgres driver file" do
   path "#{modules_dir}/postgresql-9.4-1201-jdbc41.jar"
-  source "file://#{install_dir}/embedded/apps/unifiedpush-server/initdb/lib/postgresql-9.4-1201-jdbc41.jar"
+  source "file://#{install_dir}/embedded/apps/unifiedpush-server/initdb/lib/postgresql-42.1.4.jar"
   owner unifiedpush_user
   group 'root'
   mode 0755

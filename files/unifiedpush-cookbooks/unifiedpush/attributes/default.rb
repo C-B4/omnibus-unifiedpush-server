@@ -162,7 +162,7 @@ end
 
 default['unifiedpush']['postgresql']['work_mem'] = "8MB"
 default['unifiedpush']['postgresql']['effective_cache_size'] = "#{(node['memory']['total'].to_i / 2) / (1024)}MB"
-default['unifiedpush']['postgresql']['checkpoint_segments'] = 10
+default['unifiedpush']['postgresql']['max_wal_size'] = 1GB
 default['unifiedpush']['postgresql']['checkpoint_timeout'] = "5min"
 default['unifiedpush']['postgresql']['checkpoint_completion_target'] = 0.9
 default['unifiedpush']['postgresql']['checkpoint_warning'] = "30s"
