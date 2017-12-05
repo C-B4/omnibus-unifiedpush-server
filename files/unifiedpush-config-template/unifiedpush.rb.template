@@ -70,11 +70,11 @@ external_url 'GENERATED_EXTERNAL_URL'
 # unifiedpush_server['db_encoding'] = "unicode"
 # unifiedpush_server['db_database'] = "unifiedpush_server"
 # unifiedpush_server['db_pool'] = 10
-## db_username, db_host, db_port oveeride PostgreSQL properties [sql_user, listen_address, port]
+## db_username, db_host, db_port oveeridden by PostgreSQL properties [sql_user, listen_address, port]
+## When explicitly seting a value for db_username, db_host, db_port we will never override from postgresql sql_user, listen_address, port
 # unifiedpush_server['db_username'] = "aerobase_server"
 # unifiedpush_server['db_password'] = nil
 ## Postgresql host over TCP connection, java jdbc does not support unix socket.
-## When explicitly seting a value for db_username, db_host, db_port we will never override from postgresql sql_user, listen_address, port
 # unifiedpush_server['db_host'] = "localhost"
 # unifiedpush_server['db_port'] = 5432
 # unifiedpush_server['db_socket'] = nil
