@@ -18,8 +18,18 @@
 install_dir = node['package']['install-dir']
 database_name = node['unifiedpush']['unifiedpush-server']['db_database']
 
+account_helper = AccountHelper.new(node)
+unifiedpush_user = account_helper.unifiedpush_user
+
+template "/tmp/db.properties" do
+  source "unifiedpush-server-db-properties.erb"
+  owner unifiedpush_user
+  mode "0644"
+  variables(node['unifiedpush']['unifiedpush-server'].to_hash)
+end
+
 execute "initialize unifiedpush-server database" do
   cwd "#{install_dir}/embedded/apps/unifiedpush-server/initdb/bin"
-  command "./init-unifiedpush-db.sh #{database_name}"
+  command "./init-unifiedpush-db.sh #{database_name} -Daerobase.config.dir=/tmp/db.properties"
   action :nothing
 end

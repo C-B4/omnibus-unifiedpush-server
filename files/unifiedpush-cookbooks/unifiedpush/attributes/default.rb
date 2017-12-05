@@ -89,7 +89,7 @@ default['unifiedpush']['unifiedpush-server']['db_encoding'] = "unicode"
 default['unifiedpush']['unifiedpush-server']['db_database'] = "unifiedpush_server"
 default['unifiedpush']['unifiedpush-server']['db_pool'] = 10
 # db_username, db_host, db_port oveeride PostgreSQL properties [sql_user, listen_address, port]
-default['unifiedpush']['unifiedpush-server']['db_username'] = "unifiedpush_server"
+default['unifiedpush']['unifiedpush-server']['db_username'] = "aerobase_server"
 default['unifiedpush']['unifiedpush-server']['db_password'] = nil
 # Postgresql host over TCP connection, java jdbc does not support unix socket.
 default['unifiedpush']['unifiedpush-server']['db_host'] = "localhost"
@@ -138,7 +138,7 @@ default['unifiedpush']['postgresql']['home'] = "/var/opt/unifiedpush/postgresql"
 # defaults to /opt/unifiedpush/embedded/bin:/opt/unifiedpush/bin/$PATH. The install-dir path is set at build time
 default['unifiedpush']['postgresql']['user_path'] = "#{node['package']['install-dir']}/embedded/bin:#{node['package']['install-dir']}/bin:$PATH"
 default['unifiedpush']['postgresql']['bin_dir'] = "#{node['package']['install-dir']}/embedded/bin"
-default['unifiedpush']['postgresql']['sql_user'] = "unifiedpush_server"
+default['unifiedpush']['postgresql']['sql_user'] = "aerobase_server"
 default['unifiedpush']['postgresql']['port'] = 5432
 default['unifiedpush']['postgresql']['listen_address'] = 'localhost'
 default['unifiedpush']['postgresql']['max_connections'] = 200
