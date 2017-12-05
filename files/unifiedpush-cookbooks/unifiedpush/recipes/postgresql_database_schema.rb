@@ -30,6 +30,6 @@ end
 
 execute "initialize unifiedpush-server database" do
   cwd "#{install_dir}/embedded/apps/unifiedpush-server/initdb/bin"
-  command "./init-unifiedpush-db.sh #{database_name} -Daerobase.config.dir=/tmp/db.properties"
+  command "./init-unifiedpush-db.sh --database=#{database_name} --config-path=/tmp/db.properties"
   action :nothing
 end
