@@ -140,6 +140,7 @@ external_url 'GENERATED_EXTERNAL_URL'
 # Apache Cassandra 
 ###
 # cassandra['enable'] = true
+# cassandra['schedule_repairs'] = false
 # cassandra['user'] = 'unifiedpush-cas'
 # cassandra['group'] = 'unifiedpush'
 # cassandra['root_dir'] = '/var/opt/unifiedpush/cassandra/data'

@@ -171,6 +171,7 @@ default['unifiedpush']['postgresql']['checkpoint_warning'] = "30s"
 # Apache Cassandra
 ###
 default['unifiedpush']['cassandra']['enable'] = true
+default['unifiedpush']['cassandra']['schedule_repairs'] = false
 default['unifiedpush']['cassandra']['ha'] = false
 default['unifiedpush']['cassandra']['install_method'] = 'tarball'
 default['unifiedpush']['cassandra']['version'] = '3.9'
@@ -187,6 +188,9 @@ default['unifiedpush']['cassandra']['use_systemd'] = false
 default['unifiedpush']['cassandra']['use_initd'] = false
 default['unifiedpush']['cassandra']['setup_jamm'] = true
 default['unifiedpush']['cassandra']['seeds'] = node['fqdn']
+default['unifiedpush']['cassandra']['max_heap_size'] = '1G'
+default['unifiedpush']['cassandra']['heap_new_size'] = '200M'
+
 # Cluster config options
 default['unifiedpush']['cassandra-config']['cluster_name'] = 'unifiedpush-cluster'
 

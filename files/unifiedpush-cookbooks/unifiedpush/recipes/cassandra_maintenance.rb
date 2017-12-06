@@ -21,7 +21,8 @@ cron 'cassandra-nodetool-nightly-repair' do
   minute "0"
   hour "1"
   user "root"
-  command 'source ' + File.join('/etc/profile.d', node['cassandra']['service_name'] + '.sh') + "; #{installation_dir}/bin/nodetool repair > /tmp/nodetool-repair.log 2>&1"
+  command "#{installation_dir}/bin/nodetool repair -seq --trace > /tmp/nodetool-repair.log 2>&1"
+  not_if { !node['unifiedpush']['cassandra']['schedule_repairs'] }
 end
 
 cron 'cassandra-nodetool-full-repair' do
@@ -29,6 +30,7 @@ cron 'cassandra-nodetool-full-repair' do
   hour "2"
   day '1'
   user "root"
-  command 'source ' + File.join('/etc/profile.d', node['cassandra']['service_name'] + '.sh') + "; #{installation_dir}/bin/nodetool repair --full > /tmp/nodetool-repair.log 2>&1"
+  command "#{installation_dir}/bin/nodetool repair --full -seq --trace > /tmp/nodetool-repair.log 2>&1"
+  not_if { !node['unifiedpush']['cassandra']['schedule_repairs'] }
 end
 
