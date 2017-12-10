@@ -24,7 +24,6 @@ dependency "postgresql"
 
 source git: "https://github.com/C-B4/unifiedpush-server.git"
 dependency "wildfly"
-dependency "cassandra-unit"
 
 relative_path "unifiedpush-server"
 build_dir = "#{project_dir}"
