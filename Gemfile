@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Install omnibus
-gem 'omnibus', github: 'chef/omnibus', tag: 'v5.5.0'
+gem 'omnibus', github: 'chef/omnibus', tag: 'v5.6.1'
 gem 'omnibus-software', github: 'C-B4/omnibus-software', branch: 'master'
 gem 'json'
 

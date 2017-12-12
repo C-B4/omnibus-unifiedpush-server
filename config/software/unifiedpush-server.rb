@@ -23,9 +23,15 @@ dependency "rsync"
 dependency "postgresql"
 dependency "wildfly"
 
+<<<<<<< HEAD
 version "1.2.0-SNAPSHOT" do
   source md5: "40e3614d330fefe88f26f679aff0bb5f"
 end
+||||||| parent of 17167ac... Remove unused sources
+source git: "https://github.com/aerobase/unifiedpush-server.git"
+=======
+source git: "https://github.com/C-B4/unifiedpush-server.git"
+>>>>>>> 17167ac... Remove unused sources
 
 version "1.2.0-RC1" do
   source md5: "f8f00ce9b554937445d0c9d4097f56ef"
