@@ -16,21 +16,16 @@
 #
 
 installation_dir = node['unifiedpush']['cassandra']['installation_dir']
+cassandra_user = node['unifiedpush']['cassandra']['user']
 
-cron 'cassandra-nodetool-nightly-repair' do
-  minute "0"
-  hour "1"
-  user "root"
-  command "#{installation_dir}/bin/nodetool repair -seq --trace > /tmp/nodetool-repair.log 2>&1"
+# Due to CASSANDRA-9143, DataStax recommends switching to full repairs
+# https://docs.datastax.com/en/cassandra/3.0/cassandra/tools/toolsRepair.html
+# Start every Suterday at 10PM EST
+cron 'cassandra-nodetool-weekly-full-repair' do
+  minute "1"
+  hour "3"
+  weekday '1'
+  user "#{cassandra_user}"
+  command "#{installation_dir}/bin/nodetool repair --full -pr -seq --trace > /tmp/nodetool-repair.log 2>&1"
   not_if { !node['unifiedpush']['cassandra']['schedule_repairs'] }
 end
-
-cron 'cassandra-nodetool-full-repair' do
-  minute "0"
-  hour "2"
-  day '1'
-  user "root"
-  command "#{installation_dir}/bin/nodetool repair --full -seq --trace > /tmp/nodetool-repair.log 2>&1"
-  not_if { !node['unifiedpush']['cassandra']['schedule_repairs'] }
-end
-

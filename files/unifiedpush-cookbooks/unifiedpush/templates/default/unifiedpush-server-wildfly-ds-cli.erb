@@ -1,3 +1,4 @@
 embed-server --server-config=standalone-full-ha.xml
 /system-property=aerogear.config.cassandra.contactpoints:add(value="<%= @cas_contactpoints %>")
 /system-property=aerogear.config.cassandra.port:add(value=<%= @cas_port %>)
+/system-property=aerogear.config.cassandra.consistencylevel:add(value=<%= @cas_consistencylevel %>)

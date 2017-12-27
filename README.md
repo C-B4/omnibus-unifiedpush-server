@@ -2,6 +2,10 @@ Unifiedpush Server Omnibus
 ==================================
 This project creates full-stack platform-specific packages for `unifiedpush-server`.
 
+Download Binaries
+------------
+Please follow the steps on the [downloads page](https://github.com/C-B4/unifiedpush-server/wiki/Unifiedpush-Installation)
+
 Preperation 
 ------------
 only when runing under non root user.

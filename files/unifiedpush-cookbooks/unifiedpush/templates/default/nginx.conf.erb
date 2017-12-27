@@ -26,6 +26,12 @@ http {
   gzip_proxied <%= @gzip_proxied %>;
   gzip_types <%= @gzip_types.join(' ') %>;
 
+  ## proxy to any other HTTP server can buffer upto 512K (32*16) of data
+  ## proxy_buffer_size - Used only for HEAD data
+  proxy_buffer_size <%= @proxy_buffer_size %>;
+  proxy_buffers <%= @proxy_buffers %>;
+  proxy_busy_buffers_size <%= @proxy_busy_buffers_size %>;
+    
   include /opt/unifiedpush/embedded/conf/mime.types;
 
   <% if @unifiedpush_http_config %>
