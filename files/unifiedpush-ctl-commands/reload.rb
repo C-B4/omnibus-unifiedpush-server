@@ -26,8 +26,13 @@ add_command 'reload', 'Run migrations after a package upgrade', 2 do |cmd_name, 
 
   case sv_name
   when 'nginx'
-    # run_sv_command_for_service('reload', sv_name)
-    output=system("#{base_path}/embedded/sbin/nginx -t -s -g \"pid /var/opt/unifiedpush/nginx/nginx.pid;\"")
+    # test config first
+    output=system("#{base_path}/embedded/sbin/nginx -t -s reload -g \"pid /var/opt/unifiedpush/nginx/nginx.pid;\"")
+    
+    # reload config
+    if output == true
+        system("#{base_path}/embedded/sbin/nginx -s reload -g \"pid /var/opt/unifiedpush/nginx/nginx.pid;\"")
+    end
   else
     puts "Usage: #{cmd_name} is supported only for nginx"
   end
