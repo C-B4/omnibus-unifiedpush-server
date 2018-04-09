@@ -223,6 +223,7 @@ default['unifiedpush']['nginx']['tcp_nodelay'] = 'on'
 default['unifiedpush']['nginx']['proxy_buffer_size'] = '8k'
 default['unifiedpush']['nginx']['proxy_buffers'] = '32 16k'
 default['unifiedpush']['nginx']['proxy_busy_buffers_size'] = '32k'
+default['unifiedpush']['nginx']['server_names_hash_bucket_size'] = "64"
 default['unifiedpush']['nginx']['gzip'] = "on"
 default['unifiedpush']['nginx']['gzip_http_version'] = "1.0"
 default['unifiedpush']['nginx']['gzip_comp_level'] = "2"

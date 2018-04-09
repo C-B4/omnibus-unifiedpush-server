@@ -31,7 +31,10 @@ http {
   proxy_buffer_size <%= @proxy_buffer_size %>;
   proxy_buffers <%= @proxy_buffers %>;
   proxy_busy_buffers_size <%= @proxy_busy_buffers_size %>;
-    
+ 
+  # Controls the maximum length of a virtual host entry (ie the length of the domain name).
+  server_names_hash_bucket_size <%= @server_names_hash_bucket_size %>; 
+
   include /opt/unifiedpush/embedded/conf/mime.types;
 
   <% if @unifiedpush_http_config %>
