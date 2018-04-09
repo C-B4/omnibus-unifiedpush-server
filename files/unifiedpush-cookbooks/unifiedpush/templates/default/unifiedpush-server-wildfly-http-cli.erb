@@ -2,3 +2,4 @@ embed-server --server-config=standalone-full-ha.xml
 /subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding, value=true)
 /subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=max-post-size, value=102400000)
 /socket-binding-group=standard-sockets/socket-binding=proxy-https/:add(port=443)
+/subsystem=logging/root-logger=ROOT:remove-handler(name=CONSOLE)

@@ -63,6 +63,17 @@ end
 include_recipe "unifiedpush::unifiedpush-server-wildfly-conf"
 include_recipe "unifiedpush::keycloak-server-wildfly-conf"
 
+# Remove wildfly log dir and create slink to logrotate dir.
+directory "#{server_dir}/standalone/log" do
+  recursive true
+  action :delete
+  only_if { ::Dir.exist?("#{server_dir}/standalone/log") }
+end
+
+link "#{server_dir}/standalone/log" do
+  to server_log_dir
+end
+
 template "#{server_etc_dir}/environment.properties" do
   source "unifiedpush-server-env-properties.erb"
   owner unifiedpush_user

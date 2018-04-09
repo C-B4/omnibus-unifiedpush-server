@@ -19,6 +19,8 @@
 CassandraHelper.new(node)
 
 installation_dir = node['unifiedpush']['cassandra']['installation_dir']
+# log_dir used in cassandra-chef-cookbook, log_directory used in logrotate recipe.
+log_dir = node['unifiedpush']['cassandra']['log_dir']
 log_directory = node['unifiedpush']['cassandra']['log_directory']
 cassandra_user = node['unifiedpush']['cassandra']['user']
 
@@ -36,6 +38,23 @@ include_recipe 'cassandra-dse' if node['unifiedpush']['cassandra']['enable']
     mode '0775'
     recursive true
   end
+end
+
+# Remove cassandra-chef-cookbook (log_dir) and create slink to logrotate dir.
+directory log_dir do
+  recursive true
+  action :delete
+  only_if { ::Dir.exist?(log_dir) }
+end
+
+link log_dir do
+  to log_directory
+end
+
+# Remove stdout appender to prevent duplicated logging from unifiedpush-ctl tail
+execute "remove stdout appender from cassandra conf" do
+  command "sed -i '/appender-ref ref=\"STDOUT\"/d' #{installation_dir}/conf/logback.xml"
+  action :run
 end
 
 runit_service "cassandra" do
