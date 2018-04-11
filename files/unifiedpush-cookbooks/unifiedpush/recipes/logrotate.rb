@@ -40,7 +40,7 @@ node['unifiedpush']['logrotate']['services'].each do |svc|
     mode "0644"
     source 'logrotate-service.erb'
     variables(
-      log_directory: node['unifiedpush'][svc]['log_directory'],
+      log_directory: File.join(node['unifiedpush'][svc]['log_directory'], 'logs'),
       options: node['unifiedpush']['logging'].to_hash.merge(node['unifiedpush'][svc].to_hash)
     )
   end

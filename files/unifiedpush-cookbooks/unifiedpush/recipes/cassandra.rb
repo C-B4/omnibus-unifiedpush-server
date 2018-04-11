@@ -49,7 +49,7 @@ runit_service "cassandra" do
   down node['unifiedpush']['cassandra']['ha']
   control ['d']
   options({
-    :log_directory => "#{log_directory}/logs"
+    :log_directory => "#{log_directory}"
   }.merge(params))
   log_options node['unifiedpush']['logging'].to_hash.merge(node['unifiedpush']['cassandra'].to_hash)
 end

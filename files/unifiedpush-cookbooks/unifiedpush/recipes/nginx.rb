@@ -47,6 +47,12 @@ link File.join(nginx_dir, "logs") do
   to nginx_log_dir
 end
 
+# Link logrotate dir to self.
+# A workarround to ensure logrotate always exists at log_directory/logs
+link "#{nginx_log_dir}/logs" do
+  to nginx_log_dir
+end
+
 nginx_config = File.join(nginx_conf_dir, "nginx.conf")
 
 unifiedpush_server_http_conf = File.join(nginx_conf_dir, "unifiedpush-http.conf")
