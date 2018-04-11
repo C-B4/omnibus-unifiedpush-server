@@ -51,12 +51,6 @@ link log_dir do
   to log_directory
 end
 
-# Remove stdout appender to prevent duplicated logging from unifiedpush-ctl tail
-execute "remove stdout appender from cassandra conf" do
-  command "sed -i '/appender-ref ref=\"STDOUT\"/d' #{installation_dir}/conf/logback.xml"
-  action :run
-end
-
 runit_service "cassandra" do
   down node['unifiedpush']['cassandra']['ha']
   control ['d']

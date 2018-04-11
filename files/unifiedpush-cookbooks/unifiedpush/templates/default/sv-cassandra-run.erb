@@ -8,7 +8,8 @@ export CASSANDRA_HOME=/var/opt/unifiedpush/cassandra/cassandra
 export CASSANDRA_CONF=/var/opt/unifiedpush/cassandra/cassandra/conf
 
 cd <%= node['unifiedpush']['cassandra']['installation_dir'] %>
+# Redirect stdout to /dev/null. cassnadra loges avilable at system.log.
 exec chpst -P \
     -U <%= node['unifiedpush']['cassandra']['user'] %> \
     -u <%= node['unifiedpush']['cassandra']['user'] %> \
-    <%= node['unifiedpush']['cassandra']['installation_dir'] %>/bin/cassandra -f -p /var/run/cassandra/cassandra.pid
+    <%= node['unifiedpush']['cassandra']['installation_dir'] %>/bin/cassandra -f -p /var/run/cassandra/cassandra.pid > /dev/null

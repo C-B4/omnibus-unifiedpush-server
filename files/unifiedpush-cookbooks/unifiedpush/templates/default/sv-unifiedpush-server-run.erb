@@ -1,4 +1,5 @@
 #!/bin/sh
 exec 2>&1
-cd <%= node['unifiedpush']['unifiedpush-server']['dir'] %>
-exec chpst -P -U <%= node['unifiedpush']['user']['username'] %> -u <%= node['unifiedpush']['user']['username'] %> bin/standalone.sh -c standalone-full-ha.xml
+cd <%= node['unifiedpush']['unifiedpush-server']['dir'] %
+# Redirect stdout to /dev/null. wildfly loges avilable at server.log and unifiedpush.log
+exec chpst -P -U <%= node['unifiedpush']['user']['username'] %> -u <%= node['unifiedpush']['user']['username'] %> bin/standalone.sh -c standalone-full-ha.xml > /dev/null 
