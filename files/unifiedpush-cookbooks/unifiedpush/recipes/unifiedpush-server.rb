@@ -63,15 +63,9 @@ end
 include_recipe "unifiedpush::unifiedpush-server-wildfly-conf"
 include_recipe "unifiedpush::keycloak-server-wildfly-conf"
 
-# Remove wildfly log dir and create slink to logrotate dir.
-directory "#{server_dir}/standalone/log" do
-  recursive true
-  action :delete
-  only_if { ::Dir.exist?("#{server_dir}/standalone/log") }
-end
-
-link "#{server_dir}/standalone/log" do
-  to server_log_dir
+# Link logrotate gir to wildfly log dir
+link "#{server_log_dir}/logs" do
+  to "#{server_dir}/standalone/log"
 end
 
 template "#{server_etc_dir}/environment.properties" do
@@ -91,7 +85,7 @@ end
 runit_service "unifiedpush-server" do
   down node['unifiedpush']['unifiedpush-server']['ha']
   options({
-    :log_directory => server_log_dir
+    :log_directory => "#{server_log_dir}/logs"
   }.merge(params))
   log_options node['unifiedpush']['logging'].to_hash.merge(node['unifiedpush']['unifiedpush-server'].to_hash)
 end

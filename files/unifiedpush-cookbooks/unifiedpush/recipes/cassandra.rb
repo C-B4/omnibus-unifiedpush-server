@@ -40,22 +40,16 @@ include_recipe 'cassandra-dse' if node['unifiedpush']['cassandra']['enable']
   end
 end
 
-# Remove cassandra-chef-cookbook (log_dir) and create slink to logrotate dir.
-directory log_dir do
-  recursive true
-  action :delete
-  only_if { ::Dir.exist?(log_dir) }
-end
-
-link log_dir do
-  to log_directory
+# Link logrotate dir to cassandra logs 
+link "#{log_directory}/logs" do
+  to log_dir
 end
 
 runit_service "cassandra" do
   down node['unifiedpush']['cassandra']['ha']
   control ['d']
   options({
-    :log_directory => log_directory
+    :log_directory => "#{log_directory}/logs"
   }.merge(params))
   log_options node['unifiedpush']['logging'].to_hash.merge(node['unifiedpush']['cassandra'].to_hash)
 end
