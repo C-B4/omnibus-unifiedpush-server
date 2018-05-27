@@ -58,6 +58,15 @@ server {
   access_log  <%= @log_directory %>/unifiedpush_access.log;
   error_log   <%= @log_directory %>/unifiedpush_error.log;
 
+  # Allow Google analytics reverse proxy from primary domain
+  location ~ ^/analytics/(.*)$ {
+      expires 31536000s;
+      proxy_set_header Pragma "public";
+      proxy_set_header Cache-Control "max-age=31536000, public";
+
+      proxy_pass https://www.google-analytics.com;
+  }
+
   location / {
     ## Serve static files from defined root folder.
     root <%= @html_dir %>;
