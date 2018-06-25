@@ -1,0 +1,45 @@
+  # Allow Google analytics reverse proxy from primary domain
+  location ~ ^/analytics/(.*)$ {
+      expires 31536000s;
+      proxy_set_header Pragma "public";
+      proxy_set_header Cache-Control "max-age=31536000, public";
+
+      proxy_pass https://www.google-analytics.com;
+  }
+
+  location / {
+    ## Serve static files from defined root folder.
+    root <%= @html_dir %>/$ups_http_host;
+    try_files $uri $uri/index.html $uri.html @unifiedpush;
+  }
+
+  ## If a file, which is not found in the root folder is requested,
+  ## then the proxy passes the request to the upsteam (unifiedpush server).
+  location @unifiedpush {
+    ## If you use HTTPS make sure you disable gzip compression
+    ## to be safe against BREACH attack.
+    <%= 'gzip off;' if @https %>
+
+    ## Some requests take more than 30 seconds.
+    proxy_read_timeout      300;
+    proxy_connect_timeout   300;
+    proxy_redirect          off;
+
+    proxy_set_header    Host                $http_host;
+    proxy_set_header    X-Real-IP           $remote_addr;
+    <% if @https %>
+    proxy_set_header    X-Forwarded-Ssl     on;
+    <% end %>
+    proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;
+    proxy_set_header    X-Forwarded-Proto   $scheme;
+    proxy_set_header    X-Frame-Options     SAMEORIGIN;
+
+    proxy_pass http://127.0.0.1:8080;
+    expires 0;
+  }
+
+  error_page  404              /404.html;
+  error_page  500 502 503 504  /50x.html;
+  location = /50x.html {
+    root <%= @html_dir %>;
+  }

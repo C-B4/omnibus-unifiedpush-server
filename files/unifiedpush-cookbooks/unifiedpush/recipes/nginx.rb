@@ -54,6 +54,7 @@ link "#{nginx_log_dir}/logs" do
 end
 
 nginx_config = File.join(nginx_conf_dir, "nginx.conf")
+nginx_locations = File.join(nginx_conf_dir, "locations.import")
 
 unifiedpush_server_http_conf = File.join(nginx_conf_dir, "unifiedpush-http.conf")
 
@@ -89,6 +90,15 @@ end
 
 template nginx_config do
   source "nginx.conf.erb"
+  owner "root"
+  group "root"
+  mode "0644"
+  variables nginx_vars
+  notifies :restart, 'service[nginx]' if omnibus_helper.should_notify?("nginx")
+end
+
+template nginx_locations do
+  source "locations.import.erb"
   owner "root"
   group "root"
   mode "0644"
