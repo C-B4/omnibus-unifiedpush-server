@@ -79,7 +79,7 @@ fi
 # GC_LOG="true"
 
 # Load Application properties from a local file.
-JAVA_OPTS="$JAVA_OPTS -Daerobase.config.dir=<%= @dir %>/etc/"
+JAVA_OPTS="$JAVA_OPTS -Daerogear.config.dir=<%= @dir %>/etc/"
 
 # Cluster configuration - Set private address to required subnet
 JAVA_OPTS="$JAVA_OPTS -Djboss.bind.address.private=<%= @server_address %>"

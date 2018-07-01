@@ -17,8 +17,8 @@ embed-server --server-config=standalone-full-ha.xml
 /subsystem=jgroups/stack=tcpping/protocol=FRAG2:add
 # Set tcpping as the stack for the ee channel
 /subsystem=jgroups/channel=ee:write-attribute(name=stack,value=tcpping)
-# Add aerobase cache-container
-/subsystem=infinispan/cache-container=aerobase:add(jndi-name="infinispan/Aerobase")
-/subsystem=infinispan/cache-container=aerobase/transport=TRANSPORT:add(lock-timeout=60000)
-/subsystem=infinispan/cache-container=aerobase/distributed-cache=otpCodes:add(mode="SYNC",owners="<%= @cache_owners %>")
+# Add aerogear cache-container
+/subsystem=infinispan/cache-container=aerogear:add(jndi-name="infinispan/Aerobase")
+/subsystem=infinispan/cache-container=aerogear/transport=TRANSPORT:add(lock-timeout=60000)
+/subsystem=infinispan/cache-container=aerogear/distributed-cache=otpCodes:add(mode="SYNC",owners="<%= @cache_owners %>")
 /subsystem="jgroups"/channel="ee":write-attribute(name=stack,value=tcpping)
