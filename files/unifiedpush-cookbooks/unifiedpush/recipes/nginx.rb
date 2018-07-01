@@ -64,7 +64,9 @@ unifiedpush_server_enabled = node['unifiedpush']['nginx']['enable']
 # Include the config file for unifiedpush-server in nginx.conf later
 nginx_vars = node['unifiedpush']['nginx'].to_hash.merge({
                :unifiedpush_http_config => unifiedpush_server_enabled ? unifiedpush_server_http_conf : nil,
-               :unifiedpush_http_configd => nginx_confd_dir
+               :unifiedpush_http_configd => nginx_confd_dir,
+	       :fqdn => node['unifiedpush']['unifiedpush-server']['server_host'],
+	       :html_dir => nginx_html_dir
              })
 
 if nginx_vars['listen_https'].nil?
@@ -78,12 +80,7 @@ template unifiedpush_server_http_conf do
   owner "root"
   group "root"
   mode "0644"
-  variables(nginx_vars.merge(
-    {
-      :fqdn => node['unifiedpush']['unifiedpush-server']['server_host'],
-      :html_dir => nginx_html_dir
-    }
-  ))
+  variables nginx_vars
   notifies :restart, 'service[nginx]' if omnibus_helper.should_notify?("nginx")
   action unifiedpush_server_enabled ? :create : :delete
 end
@@ -98,7 +95,7 @@ template nginx_config do
 end
 
 template nginx_locations do
-  source "locations.import.erb"
+  source "nginx-locations.import.erb"
   owner "root"
   group "root"
   mode "0644"
