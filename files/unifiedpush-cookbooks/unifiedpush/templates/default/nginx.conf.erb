@@ -37,11 +37,12 @@ http {
 
   include /opt/unifiedpush/embedded/conf/mime.types;
 
+  <% if @custom_nginx_config %>
+  include <%= @custom_nginx_config %>; 
+  <% end %>
   <% if @unifiedpush_http_config %>
   include <%= @unifiedpush_http_config %>;
   <% end %>
 
   include <%= @unifiedpush_http_configd %>/*.conf;
-
-  <%= @custom_nginx_config %>
 }

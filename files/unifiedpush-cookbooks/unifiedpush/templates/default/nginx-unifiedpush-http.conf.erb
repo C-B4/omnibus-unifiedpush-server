@@ -67,6 +67,10 @@ server {
       proxy_pass https://www.google-analytics.com;
   }
 
+  <% if @custom_unifiedpush_server_config %>
+  include <%= @custom_unifiedpush_server_config %>;
+  <% end %>
+
   location / {
     ## Serve static files from defined root folder.
     root <%= @html_dir %>;
@@ -99,6 +103,4 @@ server {
 
 
   error_page 502 /502.html;
-
-  <%= @custom_unifiedpush_server_config %>
 }
