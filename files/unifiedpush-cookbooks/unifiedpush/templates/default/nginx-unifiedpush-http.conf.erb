@@ -58,8 +58,6 @@ server {
   access_log  <%= @log_directory %>/unifiedpush_access.log;
   error_log   <%= @log_directory %>/unifiedpush_error.log;
 
-  <%= @custom_unifiedpush_server_config %>
-
   set $ups_http_host "";
   include locations.import;
 }

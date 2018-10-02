@@ -13,6 +13,8 @@ events {
   worker_connections <%= @worker_connections %>;
 }
 
+<%= @custom_nginx_config %>
+
 http {
   sendfile <%= @sendfile %>;
   tcp_nopush <%= @tcp_nopush %>;
@@ -42,6 +44,4 @@ http {
   <% end %>
 
   include <%= @unifiedpush_http_configd %>/*.conf;
-
-  <%= @custom_nginx_config %>
 }
