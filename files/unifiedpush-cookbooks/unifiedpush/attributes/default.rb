@@ -247,6 +247,7 @@ default['unifiedpush']['nginx']['listen_port'] = nil # override only if you have
 default['unifiedpush']['nginx']['listen_https'] = nil # override only if your reverse proxy internally communicates over HTTP
 default['unifiedpush']['nginx']['custom_unifiedpush_server_config'] = nil
 default['unifiedpush']['nginx']['custom_nginx_config'] = nil
+default['unifiedpush']['nginx']['custom_http_config'] = nil
 
 ###
 # Logging

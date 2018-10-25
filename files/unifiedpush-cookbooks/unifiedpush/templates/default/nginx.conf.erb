@@ -39,6 +39,8 @@ http {
 
   include /opt/unifiedpush/embedded/conf/mime.types;
 
+  <%= @custom_http_config %>
+
   <% if @unifiedpush_http_config %>
   include <%= @unifiedpush_http_config %>;
   <% end %>
