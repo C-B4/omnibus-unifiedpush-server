@@ -4,7 +4,7 @@ embed-server --server-config=standalone-full-ha.xml
 /subsystem=jgroups/stack=tcpping/transport=TCP:add(socket-binding=jgroups-tcp)
 /subsystem=jgroups/stack=tcpping/protocol=TCPPING:add
 # Set the properties for the TCPPING protocol
-/subsystem=jgroups/stack=tcpping/protocol=TCPPING:write-attribute(name=properties,value={initial_hosts="<% @server_contactpoints.split(",").each do |contactpoint| %><%= contactpoint %>[7600],<% end %>",port_range=10,timeout=3000,num_initial_members=2})
+/subsystem=jgroups/stack=tcpping/protocol=TCPPING:write-attribute(name=properties,value={initial_hosts="<% @server_contactpoints.split(",").each do |contactpoint| %><%= contactpoint %>[7600],<% end %>",port_range=10})
 /subsystem=jgroups/stack=tcpping/protocol=MERGE3:add
 /subsystem=jgroups/stack=tcpping/protocol=FD_SOCK:add(socket-binding=jgroups-tcp-fd)
 /subsystem=jgroups/stack=tcpping/protocol=FD:add

@@ -34,6 +34,9 @@ execute "copy keycloak overlay to wildfly dir" do
     user "root"
 end
 
+# install keycloak-server-wildfly-cli.erb to cli directory
+# update keycloak-server-wildfly-cli.erb on KC version upgrade
+# source template 'keycloak-overlay-X.X.X.Final/bin/keycloak-install-ha.cli'
 template "#{server_dir}/cli/keycloak-server-wildfly.cli" do
   owner unifiedpush_user
   group "root"
