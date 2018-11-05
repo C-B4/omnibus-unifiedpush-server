@@ -64,7 +64,7 @@ end
 # NOTE: These recipes are written idempotently, but require a running
 # Cassandra service.  They should run each time (on the appropriate
 # backend machine, of course), because they also handle schema
-# upgrades for new releases of AeroBase.  As a result, we can't
+# upgrades for new releases of Aerogear.  As a result, we can't
 # just do a check against node['unifiedpush']['bootstrap']['enable'],
 # which would only run them one time.
 if node['unifiedpush']['cassandra']['enable']
