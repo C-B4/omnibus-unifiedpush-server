@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
  
-# Install omnibus
+# Install omnibus  
 gem 'omnibus', github: 'chef/omnibus', tag: 'v5.6.12'
 gem 'omnibus-software', github: 'C-B4/omnibus-software', branch: 'master'
 gem 'json'
