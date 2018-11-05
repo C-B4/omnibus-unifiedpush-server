@@ -21,4 +21,5 @@ embed-server --server-config=standalone-full-ha.xml
 /subsystem=infinispan/cache-container=aerogear:add(jndi-name="infinispan/aerogear")
 /subsystem=infinispan/cache-container=aerogear/transport=TRANSPORT:add(lock-timeout=60000)
 /subsystem=infinispan/cache-container=aerogear/distributed-cache=otpcodes:add(mode="SYNC",owners="<%= @cache_owners %>")
+/subsystem=infinispan/cache-container=aerogear/replicated-cache=clusterevents:add()
 /subsystem="jgroups"/channel="ee":write-attribute(name=stack,value=tcpping)
