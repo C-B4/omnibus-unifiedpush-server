@@ -32,18 +32,38 @@ directory "#{backup_dir}" do
   action :create
 end
 
-template "#{home_dir}/postgresql-backup.conf" do
+template "#{home_dir}/postgresql-ups-backup.conf" do
   source "postgresql-backup.erb"
   owner unifiedpush_user
   mode "0664"
-  variables(node['unifiedpush']['unifiedpush-server'].to_hash)
+  variables(node['unifiedpush']['unifiedpush-server'].to_hash.merge({
+    :db_username => "#{node['unifiedpush']['unifiedpush-server']['db_username']}"
+  })
   not_if { !node['unifiedpush']['postgresql']['enable'] }
 end
 
-cron 'postgresql-nightly-backup' do
+template "#{home_dir}/postgresql-kc-backup.conf" do
+  source "postgresql-backup.erb"
+  owner unifiedpush_user
+  mode "0664"
+  variables(node['unifiedpush']['unifiedpush-server'].to_hash.merge({
+    :db_username => "#{node['unifiedpush']['keycloak-server']['db_username']}"
+  })
+  not_if { !node['unifiedpush']['postgresql']['enable'] }
+end
+
+cron 'postgresql-ups-nightly-backup' do
   minute "0"
   hour "3"
   user "root"
-  command "sh -x #{install_dir}/embedded/cookbooks/unifiedpush/libraries/pg_backup_rotated.sh -c #{home_dir}/postgresql-backup.conf > /tmp/postgresql-backup.log 2>&1"
+  command "sh -x #{install_dir}/embedded/cookbooks/unifiedpush/libraries/pg_backup_rotated.sh -c #{home_dir}/postgresql-ups-backup.conf > /tmp/postgresql-ups-backup.log 2>&1"
+  not_if { !node['unifiedpush']['postgresql']['enable'] }
+end
+
+cron 'postgresql-kc-nightly-backup' do
+  minute "0"
+  hour "3"
+  user "root"
+  command "sh -x #{install_dir}/embedded/cookbooks/unifiedpush/libraries/pg_backup_rotated.sh -c #{home_dir}/postgresql-kc-backup.conf > /tmp/postgresql-kc-backup.log 2>&1"
   not_if { !node['unifiedpush']['postgresql']['enable'] }
 end
