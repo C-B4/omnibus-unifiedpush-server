@@ -37,8 +37,9 @@ template "#{home_dir}/postgresql-ups-backup.conf" do
   owner unifiedpush_user
   mode "0664"
   variables(node['unifiedpush']['unifiedpush-server'].to_hash.merge({
-    :db_username => "#{node['unifiedpush']['unifiedpush-server']['db_username']}"
-  })
+    :db_username => "#{node['unifiedpush']['unifiedpush-server']['db_username']}",
+    :db_database => "#{node['unifiedpush']['unifiedpush-server']['db_database']}"
+  }))
   not_if { !node['unifiedpush']['postgresql']['enable'] }
 end
 
@@ -47,11 +48,12 @@ template "#{home_dir}/postgresql-kc-backup.conf" do
   owner unifiedpush_user
   mode "0664"
   variables(node['unifiedpush']['unifiedpush-server'].to_hash.merge({
-    :db_username => "#{node['unifiedpush']['keycloak-server']['db_username']}"
-  })
+    :db_username => "#{node['unifiedpush']['keycloak-server']['db_username']}",
+    :db_database => "#{node['unifiedpush']['keycloak-server']['db_database']}"
+  }))
   not_if { !node['unifiedpush']['postgresql']['enable'] }
 end
-
+aaaaa
 cron 'postgresql-nightly-backup' do
   minute "0"
   hour "3"

@@ -109,7 +109,12 @@ do
 	EXCLUDE_SCHEMA_ONLY_CLAUSE="$EXCLUDE_SCHEMA_ONLY_CLAUSE and datname !~ '$SCHEMA_ONLY_DB'"
 done
 
-FULL_BACKUP_QUERY="select datname from pg_database where not datistemplate and datallowconn $EXCLUDE_SCHEMA_ONLY_CLAUSE order by datname;"
+for INCLUDED_SCHEMA in ${INCLUDED_SCHEMA_LIST//,/ }
+do
+        INCLUDED_SCHEMA_CLAUSE="$INCLUDED_SCHEMA_CLAUSE and datname ~ '$INCLUDED_SCHEMA'"
+done
+
+FULL_BACKUP_QUERY="select datname from pg_database where not datistemplate and datallowconn $EXCLUDE_SCHEMA_ONLY_CLAUSE $INCLUDED_SCHEMA_CLAUSE order by datname;"
 
 echo -e "\n\nPerforming full backups"
 echo -e "--------------------------------------------\n"
