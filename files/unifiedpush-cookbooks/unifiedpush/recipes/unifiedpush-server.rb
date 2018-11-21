@@ -50,7 +50,7 @@ end
 
 # Always re-extract wildfly and recreate configuration.
 execute 'extract_wildfly' do
-  command "tar xzvf #{install_dir}/embedded/apps/wildfly/wildfly-13.0.0.Final.tar.gz --strip-components 1"
+  command "tar xzvf #{install_dir}/embedded/apps/wildfly/wildfly-14.0.1.Final.tar.gz --strip-components 1"
   cwd "#{server_dir}"
 end
 
