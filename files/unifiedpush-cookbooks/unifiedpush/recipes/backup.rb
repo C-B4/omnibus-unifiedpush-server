@@ -53,7 +53,7 @@ template "#{home_dir}/postgresql-kc-backup.conf" do
   }))
   not_if { !node['unifiedpush']['postgresql']['enable'] }
 end
-aaaaa
+
 cron 'postgresql-nightly-backup' do
   minute "0"
   hour "3"
