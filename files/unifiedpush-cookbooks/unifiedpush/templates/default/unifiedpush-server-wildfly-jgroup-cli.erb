@@ -20,6 +20,12 @@ embed-server --server-config=standalone-full-ha.xml
 # Add aerogear cache-container
 /subsystem=infinispan/cache-container=aerogear:add(jndi-name="infinispan/aerogear")
 /subsystem=infinispan/cache-container=aerogear/transport=TRANSPORT:add(lock-timeout=60000)
+/subsystem=infinispan/cache-container=aerogear/invalidation-cache=databases:add()
+/subsystem=infinispan/cache-container=aerogear/invalidation-cache=aliases:add()
+/subsystem=infinispan/cache-container=aerogear/invalidation-cache=variant-ids-per-clientid:add()
+/subsystem=infinispan/cache-container=aerogear/invalidation-cache=variant-by-id:add()
+/subsystem=infinispan/cache-container=aerogear/invalidation-cache=application-by-id:add()
+/subsystem=infinispan/cache-container=aerogear/invalidation-cache=application-by-variant-id:add()
+/subsystem=infinispan/cache-container=aerogear/invalidation-cache=application-by-name:add()
 /subsystem=infinispan/cache-container=aerogear/distributed-cache=otpcodes:add(mode="SYNC",owners="<%= @cache_owners %>")
-/subsystem=infinispan/cache-container=aerogear/replicated-cache=clusterevents:add()
 /subsystem="jgroups"/channel="ee":write-attribute(name=stack,value=tcpping)
