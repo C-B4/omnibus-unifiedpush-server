@@ -21,6 +21,9 @@ http {
   tcp_nodelay <%= @tcp_nodelay %>;
 
   keepalive_timeout <%= @keepalive_timeout %>;
+  
+  ## Don't show the nginx version number, a security best practice
+  server_tokens off;
 
   gzip <%= @gzip %>;
   gzip_http_version <%= @gzip_http_version %>;
