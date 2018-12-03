@@ -1,13 +1,21 @@
   # Unifiedpush configuration hook.
   <%= @custom_unifiedpush_server_config %>
 
+  <% if @set_real_ip_from %>
+  <% @set_real_ip_from.each do |real_ip| %>
+  set_real_ip_from <%= real_ip %>;
+  <% end %>
+  real_ip_header X-Forwarded-For;
+  real_ip_recursive on;
+  <% end %>
+
   # Allow Google analytics reverse proxy from primary domain
   location ~ ^/analytics/(.*)$ {
       expires 31536000s;
       proxy_set_header Pragma "public";
       proxy_set_header Cache-Control "max-age=31536000, public";
 
-      proxy_pass https://www.google-analytics.com;
+      proxy_pass https://www.google-analytics.com<% if @set_real_ip_from %><%= '$uri$is_args$args&uip=$remote_addr' %><% end %>;
   }
 
   ## Proxt pass form sl to shortlinks
