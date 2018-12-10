@@ -16,7 +16,7 @@
 
 name "unifiedpush-keycloak-theme"
 skip_transitive_dependency_licensing true
-default_version "master"
+default_version "v1.2.7"
 
 source git: "https://github.com/C-B4/unifiedpush-keycloak-theme.git"
 

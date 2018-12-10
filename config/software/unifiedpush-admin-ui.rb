@@ -15,7 +15,7 @@
 #
 
 name "unifiedpush-admin-ui"
-default_version "master"
+default_version "v1.2.7"
 
 dependency "ruby"
 dependency "bundler"
