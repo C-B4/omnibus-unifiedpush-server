@@ -1,0 +1,11 @@
+version: '3'
+services:
+  ups:
+    build: .
+    security_opt:
+      - seccomp:unconfined
+    tmpfs:
+      - /run
+      - /run/lock
+    privileged: true
+    hostname: integration-mcs.c-b4.com
