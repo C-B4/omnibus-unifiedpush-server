@@ -49,8 +49,8 @@ RUN systemctl enable sshd.service
 # Install UPS/KC
 ADD /download.sh /tmp/download.sh
 RUN /tmp/download.sh
-RUN rpm -i unifiedpush-server-*.rpm
-RUN rpm -i keycloak-server-*.rpm
+RUN rpm -i unifiedpush-server*.rpm
+RUN rpm -i keycloak-server*.rpm
 
 # Install config-setup.sh but use it only after hostname is properly set
 COPY /config-setup.sh /tmp/config-setup.sh
