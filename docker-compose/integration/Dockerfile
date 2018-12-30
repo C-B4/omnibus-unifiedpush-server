@@ -52,6 +52,9 @@ RUN /tmp/download.sh
 RUN rpm -i unifiedpush-server-*.rpm
 RUN rpm -i keycloak-server-*.rpm
 
+# Install config-setup.sh but use it only after hostname is properly set
+COPY /config-setup.sh /tmp/config-setup.sh
+
 # Standard SSH port
 EXPOSE 22 80 443
 CMD ["/usr/sbin/init"]
