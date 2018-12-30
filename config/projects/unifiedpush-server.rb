@@ -15,8 +15,6 @@
 # limitations under the License.
 #
 
-require "#{Omnibus::Config.project_root}/lib/unifiedpush/build_iteration"
-
 name "unifiedpush-server"
 maintainer "Yaniv Marom-Nachumi"
 homepage "https://github.com/C-B4/omnibus-unifiedpush-server"
@@ -25,8 +23,8 @@ homepage "https://github.com/C-B4/omnibus-unifiedpush-server"
 # and /opt/unifiedpush on all other platforms
 install_dir "#{default_root}/unifiedpush"
 
-build_version   Omnibus::BuildVersion.new.semver
-build_iteration Unifiedpush::BuildIteration.new.build_iteration
+build_version IO.read(File.expand_path("../../../VERSION", __FILE__)).strip
+build_iteration 1
 
 # Creates required build directories
 dependency "preparation"

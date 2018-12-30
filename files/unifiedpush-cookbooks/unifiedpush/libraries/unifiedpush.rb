@@ -78,6 +78,7 @@ module Unifiedpush
       end
 
       Unifiedpush['unifiedpush_server']['server_host'] = uri.host
+      Unifiedpush['keycloak_server']['server_host'] = uri.host
 
       case uri.scheme
       when "http"

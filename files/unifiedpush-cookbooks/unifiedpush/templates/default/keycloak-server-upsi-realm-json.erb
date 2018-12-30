@@ -19,8 +19,7 @@
         {
             "username" : "admin",
             "enabled": true,
-            "credentials" : [{ "type" : "password", "value" : "123" }],
-            "requiredActions": [ "UPDATE_PASSWORD" ],
+            "credentials" : [{ "type" : "password", "value" : "password" }],
             "realmRoles": [ "admin" ],
             "applicationRoles": {
                "realm-management": [ "realm-admin" ],
@@ -41,5 +40,20 @@
         ]
     },
     "scopeMappings": [ ],
-    "clients": [ ]
+    "clients": [
+        {
+            "clientId": "ups-installation-c-b4-test",
+            "enabled": true,
+	    "publicClient": true,
+	    "rootUrl": "http<% if @server_https %>s<% end %>://c-b4-test<%= @oauth2_subdomain_seperator %><%= @server_host %>"
+            "baseUrl": "/",
+            "redirectUris": [
+                "http://localhost",
+                "/*"
+	    ],
+	    "webOrigins": [
+                "*"
+      	    ]
+        }
+    ]
 }
