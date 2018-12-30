@@ -8,4 +8,4 @@ services:
       - /run
       - /run/lock
     privileged: true
-    hostname: integration-mcs.c-b4.com
+    hostname: integration.mcs.c-b4.info

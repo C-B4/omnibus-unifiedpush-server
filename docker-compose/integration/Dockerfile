@@ -5,7 +5,8 @@ RUN yum update -y && yum install -y java-1.8.0-openjdk \
         openssh-server \
         openssl-devel \
 	systemd \
-	iproute
+	iproute \
+	git
 
 # Add jenkins user
 RUN useradd -ms /bin/bash jenkins -d /var/lib/jenkins
@@ -49,6 +50,7 @@ RUN systemctl enable sshd.service
 ADD /download.sh /tmp/download.sh
 RUN /tmp/download.sh
 RUN rpm -i unifiedpush-server-*.rpm
+RUN rpm -i keycloak-server-*.rpm
 
 # Standard SSH port
 EXPOSE 22 80 443
