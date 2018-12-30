@@ -21,7 +21,6 @@ dependency "ruby"
 dependency "bundler"
 dependency "rsync"
 dependency "postgresql"
-dependency "wildfly"
 
 source git: "https://github.com/C-B4/unifiedpush-server.git"
 
