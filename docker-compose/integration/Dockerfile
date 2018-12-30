@@ -54,6 +54,7 @@ RUN rpm -i keycloak-server-*.rpm
 
 # Install config-setup.sh but use it only after hostname is properly set
 COPY /config-setup.sh /tmp/config-setup.sh
+COPY /install-lets-encrypt.sh /tmp/install-lets-encrypt.sh
 
 # Standard SSH port
 EXPOSE 22 80 443
