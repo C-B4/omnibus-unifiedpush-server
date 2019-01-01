@@ -6,7 +6,8 @@ RUN yum update -y && yum install -y java-1.8.0-openjdk \
         openssl-devel \
 	systemd \
 	iproute \
-	git
+	git \
+	epel-release
 
 # Add jenkins user
 RUN useradd -ms /bin/bash jenkins -d /var/lib/jenkins
@@ -45,16 +46,6 @@ rm -f /lib/systemd/system/anaconda.target.wants/*;
 VOLUME [ "/sys/fs/cgroup" ]
 
 RUN systemctl enable sshd.service
-
-# Install UPS/KC
-ADD /download.sh /tmp/download.sh
-RUN /tmp/download.sh
-RUN rpm -i unifiedpush-server*.rpm
-RUN rpm -i keycloak-server*.rpm
-
-# Install config-setup.sh but use it only after hostname is properly set
-COPY /config-setup.sh /tmp/config-setup.sh
-COPY /install-lets-encrypt.sh /tmp/install-lets-encrypt.sh
 
 # Standard SSH port
 EXPOSE 22 80 443
